@@ -1,6 +1,5 @@
 import './App.css'
 import {QueryClient, QueryClientProvider} from 'react-query'
-import VideoPlayer from "./components/VideoPlayer.tsx";
 import {
     createBrowserRouter, Navigate,
     RouterProvider,
@@ -17,13 +16,6 @@ const router = createBrowserRouter([
     {
         path : "/login",
         element : <Login/>
-    },
-    {
-        path : '/queue',
-        element : <>
-            <h1>Video Generator</h1>
-            <QueueImageGenerator/>
-        </>
     }
 ]);
 
@@ -35,7 +27,7 @@ function Home() {
     }
     return <>
         <h1>Video Generator</h1>
-        <VideoPlayer/>
+        <QueueImageGenerator/>
     </>
 }
 
