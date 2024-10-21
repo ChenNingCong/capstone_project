@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { TextField, Button, Box, Typography, Container, CssBaseline } from '@mui/material';
 import {useAuth} from "./auth/auth.tsx";
+import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
     const [email, setEmail] = useState('');
@@ -8,6 +9,7 @@ const LoginPage = () => {
     const authContext = useAuth();
     const user = authContext.user;
     const login = authContext.login;
+    const navigate = useNavigate();
     const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         login(email, password);
@@ -35,8 +37,17 @@ const LoginPage = () => {
                         variant="contained"
                         color="primary"
                         onClick={authContext.logout}
+                        sx={{ mr: 2 }}
                     >
                         Logout
+                    </Button>
+                    <Button
+                        sx={{ ml: 2 }}
+                        variant="contained"
+                        color="secondary"
+                        onClick={()=>navigate("/")}
+                    >
+                        Home
                     </Button>
                 </Box>
             </Box>
