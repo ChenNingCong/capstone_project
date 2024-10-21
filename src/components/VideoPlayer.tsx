@@ -2,11 +2,11 @@ import { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import ReactPlayer from 'react-player';
 import {FormControl, InputLabel, MenuItem, Select, SelectChangeEvent} from '@mui/material';
-
+const API_SERVER_URL= import.meta.env.VITE_API_SERVER_URL
 // Simulated function to fetch image URLs from the server
 function getVideoUrl(index : number){
     const seed = Math.max(0, index)
-    return `http://0.0.0.0:8080/api/video-generate/random/${seed}`
+    return `${API_SERVER_URL}/api/video-generate/random/${seed}`
 };
 
 const ImageGallery = () => {
