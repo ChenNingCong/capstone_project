@@ -37,7 +37,7 @@ const QueueImageGenerator = () => {
         return result.data["path"]
     }
 
-    const { data, error, isLoading, isError, refetch } = useQuery('video', fetchData, {
+    const { data, error, isLoading, isError, isFetching, refetch } = useQuery('video', fetchData, {
         enabled: false, // This prevents the query from running automatically
     });
     
@@ -51,7 +51,7 @@ const QueueImageGenerator = () => {
    
 
     return (
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width : "640px"}}>
             <FormControl fullWidth style={{ width: "60%" }}>
                 <InputLabel id="demo-simple-select-label">type</InputLabel>
                 <Select
@@ -76,9 +76,8 @@ const QueueImageGenerator = () => {
             />
             <p style={{ width: "70%" }}>Click the button to generate (may take several seconds):</p>
             <Button variant="outlined" href="#outlined-buttons" onClick={() => refetch()} disabled={isLoading}>
-                {isLoading ? 'Loading...' : 'Generate'}
+                {isFetching ? 'Loading...' : 'Generate'}
             </Button>
-            <div className="p-4">
                 {isError && <p className="text-red-500 mt-2">Error: {error.message}</p>}
                 {data && (
                     <div className="mt-4">
@@ -86,8 +85,7 @@ const QueueImageGenerator = () => {
                         <pre className="bg-gray-100 p-2 rounded mt-2">{JSON.stringify(data, null, 2)}</pre>
                     </div>
                 )}
-            </div>
-            {isLoading || <ReactPlayer
+            {isFetching || <ReactPlayer
                 controls={true}
                 url={getVideoUrl(data)}
             />}
